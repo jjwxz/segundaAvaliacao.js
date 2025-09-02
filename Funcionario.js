@@ -81,3 +81,20 @@ class Medico extends Funcionario {
     }
 }
 
+// Classe Secretaria (herda de Funcionario, composição com Agenda)
+class Secretaria extends Funcionario {
+    constructor(nome, idFuncional, salario) {
+        super(nome, idFuncional, salario);
+        this.agendas = [];
+    }
+
+    descreverFuncao() {
+        return "Secretária: Agendamento de consultas e administração geral da clínica.";
+    }
+
+    criarAgendamento(data, descricao, responsavel) {
+        const novaAgenda = new Agenda(data, descricao, responsavel);
+        this.agendas.push(novaAgenda);
+        console.log("Agendamento criado com sucesso!")
+    }
+}
