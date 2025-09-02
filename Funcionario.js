@@ -95,6 +95,47 @@ class Secretaria extends Funcionario {
     criarAgendamento(data, descricao, responsavel) {
         const novaAgenda = new Agenda(data, descricao, responsavel);
         this.agendas.push(novaAgenda);
-        console.log("Agendamento criado com sucesso!")
+        console.log(`Agendamento criado com sucesso!`)
     }
 }
+
+
+// Teste de Herança e Encapsulamento
+const medico1 = new Medico("João", "M201", 10000);
+const secretaria1 = new Secretaria("Bruna", "5475", 2500);
+
+/*
+// get e set
+console.log("Salário incial da Secretaria:", secretaria1.getSalario());
+
+secretaria1.setSalario(3000);
+console.log("Salário atualizado da secretaria:", secretaria1.getSalario());
+*/
+
+
+// Tese de Polimorfismo
+const funcionarios = [medico1, secretaria1];
+
+/*
+funcionarios.forEach(func => {
+  console.log(`${func.nome}: ${func.descreverFuncao()}`);
+});
+*/
+
+// Teste de Agregação
+const cardio = new Especialidade("Cardiologista");
+const dermato = new Especialidade("Dermatologista");
+
+medico1.adicionarEspecialidade(cardio);
+medico1.adicionarEspecialidade(dermato);
+
+// console.log("Médico com especialidades:", medico1);
+
+
+// Teste de Composição
+/*
+secretaria1.criarAgendamento("02-09-2025", "Check-up", "Dr. João");
+secretaria1.criarAgendamento("02-09-2025", "Consult do Exame", "Dr. João");
+
+console.log(`Agendamentos: ${secretaria1}´`)
+*/
