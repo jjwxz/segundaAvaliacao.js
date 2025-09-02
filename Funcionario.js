@@ -104,7 +104,6 @@ class Secretaria extends Funcionario {
 const medicoJoao = new Medico("João", "M201", 10000);
 const secretariaBruna = new Secretaria("Bruna", "S475", 2500);
 
-// Teste de encapsulamento
 console.log("Salário inicial da Secretária:", secretariaBruna.getSalario());
 secretariaBruna.setSalario(3000);
 console.log("Salário atualizado da Secretária:", secretariaBruna.getSalario());
