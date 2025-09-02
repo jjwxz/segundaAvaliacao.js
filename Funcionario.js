@@ -95,47 +95,35 @@ class Secretaria extends Funcionario {
     criarAgendamento(data, descricao, responsavel) {
         const novaAgenda = new Agenda(data, descricao, responsavel);
         this.agendas.push(novaAgenda);
-        console.log(`Agendamento criado com sucesso!`)
+        console.log(`Agendamento criado: ${descricao} em ${data}, com ${responsavel}.`);
     }
 }
 
 
 // Teste de Herança e Encapsulamento
-const medico1 = new Medico("João", "M201", 10000);
-const secretaria1 = new Secretaria("Bruna", "5475", 2500);
+const medicoJoao = new Medico("João", "M201", 10000);
+const secretariaBruna = new Secretaria("Bruna", "S475", 2500);
 
-/*
-// get e set
-console.log("Salário incial da Secretaria:", secretaria1.getSalario());
+// Teste de encapsulamento
+console.log("Salário inicial da Secretária:", secretariaBruna.getSalario());
+secretariaBruna.setSalario(3000);
+console.log("Salário atualizado da Secretária:", secretariaBruna.getSalario());
 
-secretaria1.setSalario(3000);
-console.log("Salário atualizado da secretaria:", secretaria1.getSalario());
-*/
-
-
-// Tese de Polimorfismo
-const funcionarios = [medico1, secretaria1];
-
-/*
+// Teste de Polimorfismo
+const funcionarios = [medicoJoao, secretariaBruna];
 funcionarios.forEach(func => {
-  console.log(`${func.nome}: ${func.descreverFuncao()}`);
+    console.log(`${func.nome} - ${func.descreverFuncao()}`);
 });
-*/
 
 // Teste de Agregação
-const cardio = new Especialidade("Cardiologista");
-const dermato = new Especialidade("Dermatologista");
+const especialidadeCardio = new Especialidade("Cardiologia");
+const especialidadeDermato = new Especialidade("Dermatologia");
 
-medico1.adicionarEspecialidade(cardio);
-medico1.adicionarEspecialidade(dermato);
-
-// console.log("Médico com especialidades:", medico1);
-
+medicoJoao.adicionarEspecialidade(especialidadeCardio);
+medicoJoao.adicionarEspecialidade(especialidadeDermato);
+console.log("\nMédico com especialidades:", medicoJoao.especialidades);
 
 // Teste de Composição
-/*
-secretaria1.criarAgendamento("02-09-2025", "Check-up", "Dr. João");
-secretaria1.criarAgendamento("02-09-2025", "Consult do Exame", "Dr. João");
-
-console.log(`Agendamentos: ${secretaria1}´`)
-*/
+secretariaBruna.criarAgendamento("02-09-2025", "Check-up", "Dr. João");
+secretariaBruna.criarAgendamento("05-09-2025", "Retorno", "Dr. João");
+console.log("Agendas atuais:", secretariaBruna.agendas);
