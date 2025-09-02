@@ -27,24 +27,27 @@ class Funcionario {
     }
 }
 
-/* Teste de Abstração
-const funcionario = new Funcionario("Teste", "000", 2000);
-console.log(funcionario)
-*/
-
-// Classe Especialidade (para agregação)
+// Classe Especialidade (para agregação) 
 class Especialidade {
-    constructor(nome) {
+    constructor(nome, codigo, descricao) {
         this.nome = nome;
+        this.codigo = codigo;
+        this.descricao = descricao;
+    }
+
+    obterDetalhes() {
+        return `${this.nome} (${this.codigo}): ${this.descricao}`;
     }
 }
 
 // Classe Agenda (para composição)
 class Agenda {
+    #responsavel;
+
     constructor(data, descricao, responsavel) {
         this.data = data;
         this.descricao = descricao;
-        this.responsavel = responsavel;
+        this.#responsavel = responsavel;
     }
 
     getData() {
@@ -54,6 +57,10 @@ class Agenda {
     getDescricao() {
         return this.descricao;
     }
+    
+    getResponsavel() {
+        return this.#responsavel;
+    }
 
     reagendar(novaData) {
         this.data = novaData
@@ -61,10 +68,11 @@ class Agenda {
     }
 }
 
-// Classe Medico (herda de Funcionario, agregação com Especialidade)
+// Classe Medico (herda de Funcionario)
 class Medico extends Funcionario {
-    constructor(nome, idFuncional, salario) {
+    constructor(nome, idFuncional, salario, crm) { 
         super(nome, idFuncional, salario);
+        this.crm = crm; 
         this.especialidades = [];
     }
 
@@ -81,10 +89,11 @@ class Medico extends Funcionario {
     }
 }
 
-// Classe Secretaria (herda de Funcionario, composição com Agenda)
+// Classe Secretaria (herda de Funcionario) 
 class Secretaria extends Funcionario {
-    constructor(nome, idFuncional, salario) {
+    constructor(nome, idFuncional, salario, ramal) {
         super(nome, idFuncional, salario);
+        this.ramal = ramal; 
         this.agendas = [];
     }
 
@@ -99,12 +108,16 @@ class Secretaria extends Funcionario {
     }
 }
 
-
 // Teste de Herança e Encapsulamento
-const medicoJoao = new Medico("João", "M201", 10000);
-const secretariaBruna = new Secretaria("Bruna", "S475", 2500);
 
-console.log("Salário inicial da Secretária:", secretariaBruna.getSalario());
+const medicoJoao = new Medico("João", "M201", 10000, "CRM/DF 12345");
+const secretariaBruna = new Secretaria("Bruna", "S475", 2500, 123);
+
+console.log(`Médico: ${medicoJoao.nome}, CRM: ${medicoJoao.crm}`);
+console.log(`Secretária: ${secretariaBruna.nome}, Ramal: ${secretariaBruna.ramal}`);
+
+//get e set
+console.log("\nSalário inicial da Secretária:", secretariaBruna.getSalario());
 secretariaBruna.setSalario(3000);
 console.log("Salário atualizado da Secretária:", secretariaBruna.getSalario());
 
@@ -115,14 +128,18 @@ funcionarios.forEach(func => {
 });
 
 // Teste de Agregação
-const especialidadeCardio = new Especialidade("Cardiologia");
-const especialidadeDermato = new Especialidade("Dermatologia");
+const especialidadeCardio = new Especialidade("Cardiologia", "CARD-01", "Tratamento de doenças do coração.");
+const especialidadeDermato = new Especialidade("Dermatologia", "DERM-02", "Tratamento de doenças da pele.");
+
+// método obterDetalhes()
+console.log("\nDetalhes da Especialidade:", especialidadeCardio.obterDetalhes());
 
 medicoJoao.adicionarEspecialidade(especialidadeCardio);
 medicoJoao.adicionarEspecialidade(especialidadeDermato);
-console.log("\nMédico com especialidades:", medicoJoao.especialidades);
+console.log("\nMédico com especialidades:", medicoJoao);
+
 
 // Teste de Composição
 secretariaBruna.criarAgendamento("02-09-2025", "Check-up", "Dr. João");
 secretariaBruna.criarAgendamento("05-09-2025", "Retorno", "Dr. João");
-console.log("Agendas atuais:", secretariaBruna.agendas);
+console.log("\nAgendamentos:", secretariaBruna.agendas);
