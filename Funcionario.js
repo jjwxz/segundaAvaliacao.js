@@ -38,3 +38,25 @@ class Especialidade {
         this.nome = nome;
     }
 }
+
+// Classe Agenda (para composição)
+class Agenda {
+    constructor(data, descricao, responsavel) {
+        this.data = data;
+        this.descricao = descricao;
+        this.responsavel = responsavel;
+    }
+
+    getData() {
+        return this.data;
+    }
+
+    getDescricao() {
+        return this.descricao;
+    }
+
+    reagendar(novaData) {
+        this.data = novaData
+        console.log(`Agendamento reagendado para: ${novaData}`); 
+    }
+}
