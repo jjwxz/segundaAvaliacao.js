@@ -60,3 +60,24 @@ class Agenda {
         console.log(`Agendamento reagendado para: ${novaData}`); 
     }
 }
+
+// Classe Medico (herda de Funcionario, agregação com Especialidade)
+class Medico extends Funcionario {
+    constructor(nome, idFuncional, salario) {
+        super(nome, idFuncional, salario);
+        this.especialidades = [];
+    }
+
+    descreverFuncao() {
+        return "Médico: Responsável pelo diagnóstico, tratamento e acompanhamento dos pacientes.";
+    }
+
+    adicionarEspecialidade(especialidade) {
+        if (especialidade instanceof Especialidade) {
+            this.especialidades.push(especialidade);
+        } else {
+            throw new Error("Só é possível adicionar objetos da classe Especialidade.");
+        }
+    }
+}
+
