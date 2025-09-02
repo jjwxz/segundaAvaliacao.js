@@ -32,3 +32,9 @@ const funcionario = new Funcionario("Teste", "000", 2000);
 console.log(funcionario)
 */
 
+// Classe Especialidade (para agregação)
+class Especialidade {
+    constructor(nome) {
+        this.nome = nome;
+    }
+}
